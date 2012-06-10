@@ -166,7 +166,7 @@
             <thead>
              <tr>
                <th style="width: 100px;">{{_i}}Name{{/i}}</th>
-               <th style="width: 50px;">{{_i}}type{{/i}}</th>
+               <th style="width: 100px;">{{_i}}type{{/i}}</th>
                <th style="width: 50px;">{{_i}}default{{/i}}</th>
                <th>{{_i}}description{{/i}}</th>
              </tr>
@@ -180,9 +180,15 @@
              </tr>
              <tr>
                <td>{{_i}}keyboard{{/i}}</td>
-               <td>{{_i}}boolean{{/i}}</td>
+               <td>{{_i}}boolean | object{{/i}}</td>
                <td>{{_i}}true{{/i}}</td>
-               <td>{{_i}}Closes the modal when escape key is pressed{{/i}}</td>
+               <td>
+                 <p>{{_i}}If enter is true the modal footers primary button is triggered when return key is pressed.{{/i}}</p>
+                 <p>{{_i}}If escape is true the modal closes when escape key is pressed.{{/i}}</p>
+                 <p>{{_i}}<strong>Backwards compatibility:</strong><br>
+                 If a boolean is supplied keyboard is applied to escape while enter defaults to false.{{/i}}</p>
+                 <p>{{_i}}Object structure is: <code>{escape: true, enter: false}</code>{{/i}}</p>
+               </td>
              </tr>
              <tr>
                <td>{{_i}}show{{/i}}</td>

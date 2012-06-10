@@ -244,7 +244,7 @@
             <thead>
              <tr>
                <th style="width: 100px;">Name</th>
-               <th style="width: 50px;">type</th>
+               <th style="width: 100px;">type</th>
                <th style="width: 50px;">default</th>
                <th>description</th>
              </tr>
@@ -258,9 +258,15 @@
              </tr>
              <tr>
                <td>keyboard</td>
-               <td>boolean</td>
+               <td>boolean | object</td>
                <td>true</td>
-               <td>Closes the modal when escape key is pressed</td>
+               <td>
+                 <p>If enter is true the modal footers primary button is triggered when return key is pressed.</p>
+                 <p>If escape is true the modal closes when escape key is pressed.</p>
+                 <p><strong>Backwards compatibility:</strong><br>
+                 If a boolean is supplied keyboard is applied to escape while enter defaults to false.</p>
+                 <p>Object structure is: <code>{escape: true, enter: false}</code></p>
+               </td>
              </tr>
              <tr>
                <td>show</td>

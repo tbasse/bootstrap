@@ -53,6 +53,7 @@
         this.isShown = true
 
         escape.call(this)
+        enter.call(this)
         backdrop.call(this, function () {
           var transition = $.support.transition && that.$element.hasClass('fade')
 
@@ -92,6 +93,7 @@
         $('body').removeClass('modal-open')
 
         escape.call(this)
+        enter.call(this)
 
         this.$element.removeClass('in')
 
@@ -166,9 +168,24 @@
     this.$backdrop = null
   }
 
+  function enter() {
+    var that = this
+    if( this.isShown && this.options.keyboard.enter ) {
+      $(document).on('keyup.return.modal', function ( e ) {
+        var target = e.target || e.srcElement
+        if( e.which == 13 && target.tagName.toLowerCase() !== 'textarea') {
+          var $primary = $(that.$element).find('.modal-footer').find('.btn-primary')
+          $primary.trigger('click')
+        }
+      })
+    } else if (!this.isShown) {
+      $(document).off('keyup.return.modal')
+    }
+  }
+
   function escape() {
     var that = this
-    if (this.isShown && this.options.keyboard) {
+    if (this.isShown && this.options.keyboard.escape) {
       $(document).on('keyup.dismiss.modal', function ( e ) {
         e.which == 27 && that.hide()
       })
@@ -186,6 +203,10 @@
       var $this = $(this)
         , data = $this.data('modal')
         , options = $.extend({}, $.fn.modal.defaults, $this.data(), typeof option == 'object' && option)
+      options.keyboard = {
+        escape: options.keyboard === false || options.keyboard.escape === false ? false : true, 
+        enter: options.keyboard.enter || false
+      }
       if (!data) $this.data('modal', (data = new Modal(this, options)))
       if (typeof option == 'string') data[option]()
       else if (options.show) data.show()
